@@ -17,12 +17,14 @@ import './style.css';
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
+import notes from "../notes";
 function App() {
   return (
     <div className="App">
       <Header className="App-header">
       </Header>
-      <Note title="This is the title" content="This is the content" />
+      {notes.map(note => (
+      <Note key={note.key} title={note.title} content={note.content} />))}
       <Footer />
     </div>
   );
