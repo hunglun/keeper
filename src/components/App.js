@@ -19,6 +19,7 @@ import Footer from "./Footer";
 import Note from "./Note";
 import notes from "../notes";
 import React from "react";
+import Form from "./Form";
 function App() {
   const [ _notes, setNotes] = React.useState(notes);
   function deleteNote(id){
@@ -28,19 +29,26 @@ function App() {
       });
     });
   }
+
+  function addNote(title, content){
+    setNotes(prevNotes => {
+      return [...prevNotes, {title: title, content: content, key: prevNotes.length + 1}];
+    });
+  }
   return (
     <div className="App">
       <Header className="App-header">
       </Header>
+      <Form addNote={addNote}/>
       {_notes.map(note => (
-      <Note onDelete={deleteNote} id={note.key} key={note.key} title={note.title} content={note.content} />))}
+      <Note  onDelete={deleteNote} id={note.key} key={note.key} title={note.title} content={note.content} />))}
       <Footer />
     </div>
   );
 }
 
 //CHALLENGE:
-//1. Implement the add note functionality.
+//1. Implement the add note functionality. [DONE]
 //- Create a constant that keeps track of the title and content.
 //- Pass the new note back to the App.
 //- Add new note to an array.
