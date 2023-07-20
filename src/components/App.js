@@ -29,10 +29,22 @@ function App() {
       });
     });
   }
+  function markNoteDone(id){
+    setNotes(prevNotes => {
+      return prevNotes.map((noteItem) => {
+        return id !== noteItem.key ? noteItem : {
+          key : noteItem.key,
+          title : noteItem.title,
+          content : noteItem.content,
+          done : true
+        }
+      });
+    });
+  }
 
   function addNote(title, content){
     setNotes(prevNotes => {
-      return [...prevNotes, {title: title, content: content, key: prevNotes.length + 1}];
+      return [...prevNotes, {title: title, content: content, key: prevNotes.length + 1, done: false}];
     });
   }
   return (
@@ -41,7 +53,7 @@ function App() {
       </Header>
       <Form addNote={addNote}/>
       {_notes.map(note => (
-      <Note  onDelete={deleteNote} id={note.key} key={note.key} title={note.title} content={note.content} />))}
+      <Note  onMarkDone={markNoteDone} onDelete={deleteNote} id={note.key} key={note.key} title={note.title} content={note.content} done={note.done}/>))}
       <Footer />
     </div>
   );
