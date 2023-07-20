@@ -20,6 +20,7 @@ function Form(props){
     function addNote(event){
         event.preventDefault();
         props.addNote(note.title, note.content);
+        setNote({title:"", content:""});
     }
 
     function showTextArea(event){
@@ -30,9 +31,9 @@ function Form(props){
     return <div>
     <form className="create-note"> 
     <h2>
-    <input onClick={showTextArea} onChange={updateNote} name="title" placeholder="Title" />
+    <input onClick={showTextArea} onChange={updateNote} value={note.title} name="title" placeholder="Title" />
     </h2>
-    <textarea style={{display : zoom? "block" : "none"}} onChange={updateNote} name="content" placeholder="Take a note..." rows="3" />
+    <textarea style={{display : zoom? "block" : "none"}} value={note.content} onChange={updateNote} name="content" placeholder="Take a note..." rows="3" />
     <Zoom in={zoom}>
     <Fab onClick={addNote} type="submit"> <AddIcon /></Fab>
     </Zoom>
